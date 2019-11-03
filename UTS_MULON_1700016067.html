@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game Sederhana</title>
+</head>
+<style type="text/css">
+	canvas{
+        border : 5px solid grey;
+	}
+	* { background:#C0DEED}
+		#awan {
+		position:fixed;
+		top:0px;left:0px;
+		width:100%;
+		height:100%;
+		text-align:center;
+		margin:0px;
+		padding:0px;
+		background-color:#C0DEED;
+		background: url(https://abs.twimg.com/images/themes/theme1/bg.png) center top repeat-x;
+		padding-top:100px;
+		padding-bottom:10px;
+		  width: 100%;
+		  height: 135px;
+		  animation: awan-animasi 10s linear infinite;
+		  -ms-animation: awan-animasi 10s linear infinite;
+		  -moz-animation: awan-animasi 10s linear infinite;
+		  -webkit-animation: awan-animasi 10s linear infinite;
+		}
+
+		@keyframes awan-animasi {
+		  from {
+		    background-position: 0 0;
+		  }
+
+		  to {
+		    background-position: 100% 0;
+		  };
+		}
+
+		@-webkit-keyframes awan-animasi {
+		  from {
+		    background-position: 0 0;
+		  }
+
+		  to {
+		    background-position: 100% 0;
+		  };
+		}
+
+		@-ms-keyframes awan-animasi {
+		  from {
+		    background-position: 0 0;
+		  }
+
+		  to {
+		    background-position: 100% 0;
+		  };
+		}
+
+		@-moz-keyframes awan-animasi {
+		  from {
+		    background-position: 0 0;
+		  }
+
+		  to {
+		    background-position: 100% 0;
+		  };
+		}
+		.p{
+			font-family: arial;
+			font-color:red;
+
+		}
+</style>
+<div id="awan">
+<body>
+	<p ><b>Ujian Tengah Semester<br>MULTIMEDIA ONLINE<br>Lutfiah Atsari Sujud<br>1700016067</p></b>
+	<canvas id="canvas" width="640" height="480"></canvas>
+<script >
+	//deklarasi variabel
+	x=y=40;
+	p=10;
+	q=100;
+	ax=by=50;
+	z=6;
+	xv=yv=4;
+	score1=score2=0;
+	a =2;
+window.onload = function(){
+	c=document.getElementById('canvas');
+	cc=c.getContext('2d');
+	setInterval(update,1000/30);
+	//interaktivitas mouse
+	c.addEventListener('mousemove',function(e){
+		x=e.clientY-q/2;
+	});
+}
+	//untuk bagian score nya
+		function reset(){
+			ax=c.width/2;
+			by=c.height/2;
+			xv=-xv;
+			yv=3;
+		}
+	function update(){
+		//function untuk objek yang bergerak 
+		ax+=xv;
+		by+=yv;
+			if(by<0 && yv<0){
+				yv=-yv;
+		}
+			if(by>c.height && yv>0){
+				yv=-yv;
+		}
+		//function score
+			if(ax<0){
+				if(by>x && by<x+q){
+				xv=-xv;
+				dy=by-(x+q/2);
+				yv= dy*0.3;
+			} else{
+				score2++;
+				reset();
+			}
+		}
+		if(ax>c.width){
+				if(by>y && by<y+q){
+				xv=-xv;
+				dy=by-(y+q/2);
+				yv= dy*0.3;
+			} else{
+				score1++;
+				reset();
+			}
+		}
+		if(y+q/2<by){
+			y+=a;
+		}else {
+			y-=a;
+		}
+		//menampilkan canvas dan objek
+		cc.fillStyle='skyblue';
+		cc.fillRect(0,0,c.width,c.height);
+		cc.fillStyle='red';
+		cc.fillRect(0,x,p,q);
+		cc.fillRect(c.width-p,y,p,q);
+		cc.fillRect(ax-z/5,by-z/5,z,z);
+		//menampilkan tulias score 1 dan score 2
+		cc.fillText(score1,100,100);
+		cc.fillText(score2,c.width-100,100);
+	}
+</script>
+<h1>Selamat Bermain!!</h1>
+</body>
+</div>
+</html>
